@@ -1,0 +1,58 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Dileban Karunamoorthy
+
+* Dependency Management
+** Define Package Repositories
+
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
+#+END_SRC
+
+** Define Packages for Installation
+
+#+BEGIN_SRC emacs-lisp
+(defvar my-packages '(which-key))
+#+END_SRC
+
+** Install Packages
+
+Eval following block to install packages
+
+#+BEGIN_SRC emacs-lisp
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-refresh-contents)
+    (package-install p))
+  (add-to-list 'package-selected-packages p))
+#+END_SRC emacs-lisp
+
+* Default Appearance
+
+** Inhibit Startup Screen and Message
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-splash-screen t)
+  (setq inhibit-startup-message t)
+#+END_SRC
+
+** Display Current Time
+
+#+BEGIN_SRC emacs-lisp
+  (display-time-mode t)
+#+END_SRC
+
+** Hide Tool Bar
+
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode 0)
+#+END_SRC
+
+** Disable Scroll Bars
+
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)
+#+END_SRC

@@ -1,0 +1,8 @@
+# config.org auto-compiles to config.el
+config.el
+
+# backup files
+*~
+
+# package install directories
+elpa/
