@@ -1,8 +1,12 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Dileban Karunamoorthy
 
+Emacs configuration specified in [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]] using Emacs Org mode.
+
 * Dependency Management
 ** Define Package Repositories
+
+List of default package repositories to search from.
 
 #+BEGIN_SRC emacs-lisp
 (require 'package)
@@ -14,13 +18,16 @@
 
 ** Define Packages for Installation
 
+Add new packages to this list. See section 'Install Packages'
+for installation.
+
 #+BEGIN_SRC emacs-lisp
 (defvar my-packages '(which-key))
 #+END_SRC
 
 ** Install Packages
 
-Eval following block to install packages
+Eval following block to install packages.
 
 #+BEGIN_SRC emacs-lisp
 (dolist (p my-packages)
@@ -31,7 +38,6 @@ Eval following block to install packages
 #+END_SRC emacs-lisp
 
 * Default Appearance
-
 ** Inhibit Startup Screen and Message
 
 #+BEGIN_SRC emacs-lisp
