@@ -86,3 +86,14 @@ Also applies to creating new files with C-x C-f.
 #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
 #+END_SRC
+** Killing Buffers
+
+Kill current buffer without prompting for buffer name.
+
+#+BEGIN_SRC emacs-lisp
+  (defun kill-current-buffer ()
+    "Kills the current buffer."
+    (interactive)
+    (kill-buffer (current-buffer)))
+  (global-set-key (kbd "C-x k") 'kill-current-buffer)
+#+END_SRC
