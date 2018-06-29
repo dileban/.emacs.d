@@ -16,27 +16,18 @@ List of default package repositories to search from.
 			 ("melpa" . "https://melpa.org/packages/")))
 #+END_SRC
 
-** Define Packages for Installation
+** Import Package Install Utility
 
-Add new packages to this list. See section 'Install Packages'
-for installation.
+The function 'use-package' simplifies importing and configuring 
+packages. Import packages "in-line" and configure at the same time, 
+as opposed to separate these activities in two different parts of 
+the file.
 
 #+BEGIN_SRC emacs-lisp
-(defvar my-packages '(which-key))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 #+END_SRC
-
-** Install Packages
-
-Eval following block to install packages.
-
-#+BEGIN_SRC emacs-lisp
-(dolist (p my-packages)
-  (unless (package-installed-p p)
-    (package-refresh-contents)
-    (package-install p))
-  (add-to-list 'package-selected-packages p))
-#+END_SRC emacs-lisp
-
 * Default Appearance
 ** Inhibit Startup Screen and Message
 
@@ -61,14 +52,6 @@ Eval following block to install packages.
 
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode 0)
-#+END_SRC
-** Highlight Current Line
-
-Highlights current line when using the windowing system. 
-Not enabled for command line.
-
-#+BEGIN_SRC emacs-lisp
-  (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
 * Backup Settings
 ** Disable Backups and Auto-Saves
@@ -98,8 +81,17 @@ Kill current buffer without prompting for buffer name.
   (global-set-key (kbd "C-x k") 'kill-current-buffer)
 #+END_SRC
 
-** Enable 'ibuffers' As Default
+** Enable 'ibuffers' as Default
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
+* Basic Editing
+** Highlight Current Line
+
+Highlights current line when using the windowing system. 
+Not enabled for command line.
+
+#+BEGIN_SRC emacs-lisp
+  (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
