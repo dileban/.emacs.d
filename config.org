@@ -97,3 +97,9 @@ Kill current buffer without prompting for buffer name.
     (kill-buffer (current-buffer)))
   (global-set-key (kbd "C-x k") 'kill-current-buffer)
 #+END_SRC
+
+** Enable 'ibuffers' As Default
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
