@@ -62,3 +62,13 @@ Eval following block to install packages.
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)
 #+END_SRC
+* Default Buffer Settings
+
+** Preferred Coding System
+
+Default all new buffers to the UTF-8 coding system.
+Also applies to creating new files with C-x C-f.
+
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+#+END_SRC
