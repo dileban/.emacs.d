@@ -60,7 +60,7 @@ Eval following block to install packages.
 ** Disable Scroll Bars
 
 #+BEGIN_SRC emacs-lisp
-  (scroll-bar-mode -1)
+  (scroll-bar-mode 0)
 #+END_SRC
 ** Highlight Current Line
 
@@ -70,7 +70,14 @@ Not enabled for command line.
 #+BEGIN_SRC emacs-lisp
   (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
-* Default Buffer Settings
+* Backup Settings
+** Disable Backups and Auto-Saves
+
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+#+END_SRC
+* Buffer Management
 ** Preferred Coding System
 
 Default all new buffers to the UTF-8 coding system.
