@@ -64,6 +64,9 @@ Eval following block to install packages.
 #+END_SRC
 ** Highlight Current Line
 
+Highlights current line when using the windowing system. 
+Not enabled for command line.
+
 #+BEGIN_SRC emacs-lisp
   (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
