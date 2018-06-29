@@ -62,8 +62,12 @@ Eval following block to install packages.
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)
 #+END_SRC
-* Default Buffer Settings
+** Highlight Current Line
 
+#+BEGIN_SRC emacs-lisp
+  (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
+#+END_SRC
+* Default Buffer Settings
 ** Preferred Coding System
 
 Default all new buffers to the UTF-8 coding system.
