@@ -6,3 +6,6 @@ config.el
 
 # package install directories
 elpa/
+
+# others
+ido.last
