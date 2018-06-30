@@ -36,6 +36,14 @@ Utility for trying packages before installing.
 (use-package try
 	:ensure t)
 #+END_SRC
+** Customizations
+
+Save all custom-settings to a separate file
+
+#+BEGIN_SRC emacs-lisp
+(setq custom-file "~/.emacs.d/custom-settings.el")
+(load custom-file t)
+#+END_SRC
 * Default Appearance
 ** Inhibit Startup Screen and Message
 
@@ -141,6 +149,3 @@ variables, etc.
     :map ivy-minibuffer-map
     ("M-y" . ivy-next-line)))
 #+END_SRC
-
-
-
