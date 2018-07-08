@@ -149,3 +149,24 @@ variables, etc.
     :map ivy-minibuffer-map
     ("M-y" . ivy-next-line)))
 #+END_SRC
+* Typesetting Systems
+** Document Preparation with LaTex
+
+Using AUCTeX for producing TeX based content, including LaTex,
+requires a TeX system such as TeX Live. To acquire TeX Live for
+Windows, download the installer from [[https://www.tug.org/texlive/acquire-netinstall.html][here]]. On Ubuntu, install
+(texlive-full) from repositories.
+
+Helpful links:
+
+- [[https://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs][A Simpleton Guide to TeX Workflow with Emacs]]
+ 
+
+#+BEGIN_SRC emacs-lisp
+(use-package auctex
+  :ensure t
+  :mode ("\\.tex\\'" . TeX-latex-mode)
+)
+#+END_SRC
+
+
