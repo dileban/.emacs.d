@@ -66,6 +66,15 @@ Save all custom-settings to a separate file
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode 0)
 #+END_SRC
+** Theme
+
+#+BEGIN_SRC emacs-lisp
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-dark)
+)
+#+END_SRC
 * Backup Settings
 ** Disable Backups and Auto-Saves
 
