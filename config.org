@@ -117,6 +117,14 @@ Not enabled for command line.
 #+BEGIN_SRC emacs-lisp
 (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
+** Text Scrolling
+
+Scroll text in current window one line at a time.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-9") (lambda ()(interactive)(scroll-down 1)))
+(global-set-key (kbd "C-0") (lambda ()(interactive)(scroll-up 1)))
+#+END_SRC
 ** Moving Point Quickly Within Screen Area
 
 Moves point quickly within the visible screen area.
