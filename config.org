@@ -61,6 +61,12 @@ Save all custom-settings to a separate file
 #+BEGIN_SRC emacs-lisp
 (tool-bar-mode 0)
 #+END_SRC
+** Hide Menu Bar
+
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode 0)
+#+END_SRC
+
 ** Disable Scroll Bars
 
 #+BEGIN_SRC emacs-lisp
