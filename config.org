@@ -210,3 +210,14 @@ Helpful links:
 #+END_SRC
 
 
+* References
+
+List of emacs configurations for inspiration
+
++ [[https://github.com/hrs/dotfiles/tree/master/emacs/.emacs.d][HRS]]
++ [[https://github.com/zamansky/using-emacs/blob/master/myinit.org][Mike Zamansky]]
++ [[https://github.com/daedreth/UncleDavesEmacs][Dawid Eckert (Uncle Dave)]]
++ [[https://github.com/munen/emacs.d][Alain M. Lafon (Munen)]]
++ [[https://github.com/bbatsov/emacs.d/blob/master/init.el][Bozhidar Batsov]]
++ [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][John Wiegley]]
++ [[https://github.com/abo-abo/oremacs][Oleh Krehel (abo abo)]]
