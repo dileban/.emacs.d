@@ -208,8 +208,6 @@ Helpful links:
   :mode ("\\.tex\\'" . TeX-latex-mode)
 )
 #+END_SRC
-
-
 * References
 
 List of emacs configurations for inspiration
