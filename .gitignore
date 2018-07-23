@@ -7,8 +7,11 @@ config.el
 # package install directories
 elpa/
 
+# projectile
+.cache/
+projectile*
+
 # others
 ido.last
 ac-comphist.dat
 url/
-.cache/
