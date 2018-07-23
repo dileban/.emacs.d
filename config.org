@@ -208,6 +208,14 @@ Helpful links:
   :mode ("\\.tex\\'" . TeX-latex-mode)
 )
 #+END_SRC
+* Programming
+** Solidity
+
+#+BEGIN_SRC emacs-lisp
+(use-package solidity-mode
+  :ensure t)
+#+END_SRC
+
 * References
 
 List of emacs configurations for inspiration
