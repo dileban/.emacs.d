@@ -248,10 +248,12 @@ Helpful links:
 #+BEGIN_SRC emacs-lisp
 (use-package go-mode
   :ensure t
+  :bind
+  ("M-." . godef-jump)
   :config
   (progn 
-    (setq gofmt-command "goimports")     
-    (add-hook 'before-save-hook 'gofmt-before-save))
+     (setq gofmt-command "goimports")     
+     (add-hook 'before-save-hook 'gofmt-before-save))
 )
 
 #+END_SRC
