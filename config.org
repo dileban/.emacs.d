@@ -56,6 +56,11 @@ Save all custom-settings to a separate file
 #+BEGIN_SRC emacs-lisp
 (display-time-mode t)
 #+END_SRC
+** Tab Width
+
+#+BEGIN_SRC emacs-lisp
+(setq-default tab-width 3)
+#+END_SRC
 ** Hide Tool Bar
 
 #+BEGIN_SRC emacs-lisp
