@@ -168,6 +168,9 @@ convenient overview of all matches.
   (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
   (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
   (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+  (setq helm-swoop-pre-input-function
+      (lambda () (if (boundp 'helm-swoop-pattern)
+                     helm-swoop-pattern "")))
   (setq helm-swoop-use-line-number-face t)
   (set-face-attribute 'helm-swoop-target-word-face nil 
       :weight 'bold
