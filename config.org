@@ -236,13 +236,22 @@ Helpful links:
 )
 #+END_SRC
 * Programming
+** General
+
+[[https://github.com/flycheck/flycheck][Flycheck]] is a syntax checking extension that supports over 50 
+languages.
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
 ** Solidity
 
 #+BEGIN_SRC emacs-lisp
 (use-package solidity-mode
   :ensure t)
 #+END_SRC
-
 ** Golang
 
 #+BEGIN_SRC emacs-lisp
