@@ -266,7 +266,7 @@ in Emacs.
 #+END_SRC
 ** Golang
 
-Setup [[https://github.com/dominikh/go-mode.el][go-mode]] for editing Go code. In order to go-mode effectively
+Setup [[https://github.com/dominikh/go-mode.el][go-mode]] for editing Go code. In order to use go-mode effectively
 install the following tools:
 
 + [[https://github.com/rogpeppe/godef][godef]]: =go get github.com/rogpeppe/godef=
