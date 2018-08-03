@@ -168,6 +168,10 @@ convenient overview of all matches.
   (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
   (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
   (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+  (setq helm-swoop-use-line-number-face t)
+  (set-face-attribute 'helm-swoop-target-word-face nil 
+      :weight 'bold
+      :foreground "deep pink")
 )
 #+END_SRC
 
@@ -203,7 +207,11 @@ files and the buffer list.
   :config
   (setq helm-autoresize-max-height 30
         helm-autoresize-min-height 30)
-  (helm-autoresize-mode 1))
+  (helm-autoresize-mode 1)
+  (set-face-attribute 'helm-selection nil 
+      :background "violet red"
+      :foreground "white")
+)
 #+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
