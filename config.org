@@ -230,6 +230,7 @@ Expand region and replace
   :ensure t
   :bind
   ("C-m" . er/expand-region)
+  :config
   (pending-delete-mode t)
 )
 #+END_SRC
