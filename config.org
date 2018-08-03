@@ -266,6 +266,14 @@ in Emacs.
 #+END_SRC
 ** Golang
 
+Setup [[https://github.com/dominikh/go-mode.el][go-mode]] for editing Go code. In order to go-mode effectively
+install the following tools:
+
++ [[https://github.com/rogpeppe/godef][godef]]: =go get github.com/rogpeppe/godef=
++ [[https://github.com/golang/lint][golint]]: =go get -u golang.org/x/lint/golint=
++ [[https://github.com/kisielk/errcheck][errcheck]]: =go get -u github.com/kisielk/errcheck=
++ [[https://godoc.org/golang.org/x/tools/cmd/guru][guru]]: =go get golang.org/x/tools/cmd/guru=
+
 #+BEGIN_SRC emacs-lisp
 (use-package go-mode
   :ensure t
@@ -276,6 +284,14 @@ in Emacs.
      (setq gofmt-command "goimports")     
      (add-hook 'before-save-hook 'gofmt-before-save))
 )
+#+END_SRC
+
+To get auto complete working, install [[https://github.com/nsf/gocode][gocode]] along with 
+[[https://github.com/auto-complete/auto-complete][auto-complete]] (see above) and [[https://github.com/nsf/gocode/tree/master/emacs][go-autocomplete]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package go-autocomplete
+  :ensure t)
 #+END_SRC
 * References
 
