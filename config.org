@@ -221,6 +221,18 @@ files and the buffer list.
       :foreground "white")
 )
 #+END_SRC
+** Expand Region and Replace
+
+Expand region and replace
+
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-m" . er/expand-region)
+  (pending-delete-mode t)
+)
+#+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
 
