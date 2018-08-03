@@ -246,6 +246,18 @@ languages.
   :ensure t
   :init (global-flycheck-mode))
 #+END_SRC
+
+[[https://github.com/auto-complete/auto-complete][auto-complete]] enables auto-completion feature for various modes
+in Emacs. 
+
+#+BEGIN_SRC emacs-lisp
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn 
+     (ac-config-default))
+)
+#+END_SRC
 ** Solidity
 
 #+BEGIN_SRC emacs-lisp
@@ -264,7 +276,6 @@ languages.
      (setq gofmt-command "goimports")     
      (add-hook 'before-save-hook 'gofmt-before-save))
 )
-
 #+END_SRC
 * References
 
