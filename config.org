@@ -145,14 +145,30 @@ Moves point quickly within the visible screen area.
 Finding stuff includes searching text within buffers, as well as
 finding buffers, files, and commonly used commands.
 
-[[https://github.com/abo-abo/swiper][Swiper]] is a replacement for the default search that shows an 
-overview of all matches. 
+[[https://github.com/abo-abo/swiper][Swiper]] is a replacement for the default search, which shows a
+convenient overview of all matches. 
 
 #+BEGIN_SRC emacs-lisp
-(use-package swiper
+;; Commented out. Prefer using Helm Swoop instead.
+;; (use-package swiper
+;;  :ensure t
+;;  :bind ("C-s" . swiper)
+;;  :config)
+#+END_SRC
+
+[[https://github.com/ShingoFukuyama/helm-swoop][Helm Swoop]] is a replacement for the default search, which shows a 
+convenient overview of all matches.
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-swoop
   :ensure t
-  :bind ("C-s" . swiper)
-  :config)
+  :bind ("C-s" . helm-swoop)
+  :config
+  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+)
 #+END_SRC
 
 Ivy is a generic completion system for Emacs, while Counsel builds 
