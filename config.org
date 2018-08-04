@@ -265,6 +265,14 @@ languages.
   :init (global-flycheck-mode))
 #+END_SRC
 
+[[https://github.com/joaotavora/yasnippet][yasnippet]] template system for convenient expansions.
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode t))
+#+END_SRC
+
 [[https://github.com/auto-complete/auto-complete][auto-complete]] enables auto-completion feature for various modes
 in Emacs. 
 
