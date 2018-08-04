@@ -229,7 +229,7 @@ Expand region and replace
 (use-package expand-region
   :ensure t
   :bind
-  ("C-m" . er/expand-region)
+  ("C-`" . er/expand-region)
   :config
   (pending-delete-mode t)
 )
