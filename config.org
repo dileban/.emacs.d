@@ -209,6 +209,7 @@ files, buffers, and bookmarks.
   ("M-x" . helm-M-x)
   ("C-x C-f" . helm-find-files)
   ("C-x C-b" . helm-buffers-list)
+  ("C-x b" . helm-buffers-list)
   ("C-x r b" . helm-bookmarks)
   :config
   (setq helm-autoresize-max-height 30
