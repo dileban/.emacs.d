@@ -291,12 +291,15 @@ in Emacs.
 ** Golang
 
 Setup [[https://github.com/dominikh/go-mode.el][go-mode]] for editing Go code. In order to use go-mode effectively
-install the following tools:
+install the following tools and ensure they are availalbe in the PATH:
 
++ [[https://godoc.org/golang.org/x/tools/cmd/goimports][goimports]]: =go get golang.org/x/tools/cmd/goimports=
 + [[https://github.com/rogpeppe/godef][godef]]: =go get github.com/rogpeppe/godef=
 + [[https://github.com/golang/lint][golint]]: =go get -u golang.org/x/lint/golint=
 + [[https://github.com/kisielk/errcheck][errcheck]]: =go get -u github.com/kisielk/errcheck=
 + [[https://godoc.org/golang.org/x/tools/cmd/guru][guru]]: =go get golang.org/x/tools/cmd/guru=
+
+NOTE: Go imports relies on existence of the GNU `diff` util in PATH.
 
 #+BEGIN_SRC emacs-lisp
 (use-package go-mode
