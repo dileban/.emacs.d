@@ -313,6 +313,11 @@ NOTE: Go imports relies on existence of the GNU `diff` util in PATH.
 )
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package go-guru
+  :ensure t)
+#+END_SRC
+
 To get auto complete working, install [[https://github.com/nsf/gocode][gocode]] along with 
 [[https://github.com/auto-complete/auto-complete][auto-complete]] (see above) and [[https://github.com/nsf/gocode/tree/master/emacs][go-autocomplete]].
 
