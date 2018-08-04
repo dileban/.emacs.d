@@ -252,6 +252,21 @@ Helpful links:
   :mode ("\\.tex\\'" . TeX-latex-mode)
 )
 #+END_SRC
+** Org Mode
+
+Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-your-org-agenda/][this]]. For a list of symbols see [[https://www.w3schools.com/charsets/ref_html_entities_4.asp][here]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :init
+  (setq org-bullets-bullet-list
+      '("◉" "●" "○" "▪" "▪"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (setq org-ellipsis " ▾")
+)
+#+END_SRC
 * Programming
 ** General
 
