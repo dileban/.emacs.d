@@ -233,6 +233,15 @@ Expand region and replace
   (pending-delete-mode t)
 )
 #+END_SRC
+** Unfil Region
+
+The reverse of fill-region. Useful when copying text from emacs to
+other destinations.
+
+#+BEGIN_SRC emacs-lisp
+(use-package unfill
+  :ensure t)
+#+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
 
