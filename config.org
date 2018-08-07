@@ -319,6 +319,13 @@ in Emacs.
      (ac-config-default))
 )
 #+END_SRC
+
+Show matching parentheses.
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
 ** Working with Projects
 
 [[https://github.com/bbatsov/projectile][Projectile]], a useful project interaction extension that makes working
