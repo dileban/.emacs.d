@@ -319,6 +319,29 @@ in Emacs.
      (ac-config-default))
 )
 #+END_SRC
+** Working with Projects
+
+[[https://github.com/bbatsov/projectile][Projectile]], a useful project interaction extension that makes working
+with projects (e.g. any directory with .git) easy. 
+
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :init
+    (projectile-mode 1)
+  :config
+  (setq projectile-completion-system 'helm)
+  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map))
+#+END_SRC
+
+[[https://github.com/bbatsov/helm-projectile][helm-projectile]] is helm mode for projectile. 
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-projectile
+  :ensure t
+  :init
+  (helm-projectile-on))
+#+END_SRC
 ** Solidity
 
 #+BEGIN_SRC emacs-lisp
