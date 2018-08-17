@@ -21,3 +21,6 @@ recentf
 
 # multiple-cursors
 .mc-lists.el
+
+# ignore changes to env.el template
+env.el
