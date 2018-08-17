@@ -44,6 +44,14 @@ Save all custom-settings to a separate file
 (setq custom-file "~/.emacs.d/custom-settings.el")
 (load custom-file t)
 #+END_SRC
+* Environment
+** Using Environment Variables 
+
+#+BEGIN_SRC emacs-lisp
+(defvar env-file "~/.emacs.d/env.el")
+(when (file-exists-p env-file)
+  (load-file env-file))
+#+END_SRC
 * Default Appearance
 ** Inhibit Startup Screen and Message
 
