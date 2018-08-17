@@ -47,6 +47,8 @@ Save all custom-settings to a separate file
 * Environment
 ** Using Environment Variables 
 
+Load system dependent variables from env.el. 
+
 #+BEGIN_SRC emacs-lisp
 (defvar env-file "~/.emacs.d/env.el")
 (when (file-exists-p env-file)
