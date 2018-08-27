@@ -404,11 +404,23 @@ To get auto complete working, install [[https://github.com/nsf/gocode][gocode]] 
 #+END_SRC
 ** Racket
 
-Setup [[https://github.com/greghendershott/racket-mode][major mode]] for [[https://racket-lang.org/][Racket]] source files and Racket REPL
+Setup [[https://github.com/greghendershott/racket-mode][major mode]] for [[https://racket-lang.org/][Racket]] source files and Racket REPL.
 
 #+BEGIN_SRC emacs-lisp
 (use-package racket-mode
   :ensure t)
+#+END_SRC
+** Yaml
+
+Setup [[https://github.com/yoshiki/yaml-mode][major mode]] for editing YAML files.
+
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :ensure t
+  :config 
+  (add-hook 'yaml-mode-hook
+      '(lambda ()
+         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 #+END_SRC
 * References
 
