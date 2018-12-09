@@ -18,6 +18,7 @@ url/
 eshell/
 bookmarks
 recentf
+server/
 
 # multiple-cursors
 .mc-lists.el
