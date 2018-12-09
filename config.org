@@ -298,6 +298,18 @@ Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-
   (setq org-ellipsis " ▾")
 )
 #+END_SRC
+** Markdown Mode
+
+Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode))
+  :init (setq markdown-command (getenv "MDCMD"))
+)
+#+END_SRC
 * Programming
 ** General
 
@@ -358,6 +370,17 @@ with projects (e.g. any directory with .git) easy.
   :ensure t
   :init
   (helm-projectile-on))
+#+END_SRC
+** Magit
+
+[[https://magit.vc/][Magit]] is a Git porcelain for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :config 
+  (setq magit-push-always-verify nil)
+)
 #+END_SRC
 ** Solidity
 
