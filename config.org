@@ -115,7 +115,7 @@ commands.
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 #+END_SRC
-* Buffer Management
+* File and Buffer Management
 ** Preferred Coding System
 
 Default all new buffers to the UTF-8 coding system.
@@ -140,6 +140,14 @@ Kill current buffer without prompting for buffer name.
 
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
+** Recent Files
+
+Enables quick access to recent (previous/past) files.
+
+#+BEGIN_SRC emacs-lisp
+(recentf-mode 1)
+(global-set-key (kbd "C-x p") 'helm-recentf)
 #+END_SRC
 * Basic Editing
 ** Highlight Current Line
