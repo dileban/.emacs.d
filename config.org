@@ -405,6 +405,13 @@ with projects (e.g. any directory with .git) easy.
   (setq magit-push-always-verify nil)
 )
 #+END_SRC
+** Docker
+
+#+BEGIN_SRC emacs-lisp
+(use-package dockerfile-mode
+  :ensure t)
+#+END_SRC
+
 ** Protocol Buffers
 
 #+BEGIN_SRC emacs-lisp
