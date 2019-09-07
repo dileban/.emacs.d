@@ -461,6 +461,12 @@ To get auto complete working, install [[https://github.com/nsf/gocode][gocode]] 
 (use-package go-autocomplete
   :ensure t)
 #+END_SRC
+** Haskell
+
+#+BEGIN_SRC emacs-lisp
+(use-package haskell-mode
+  :ensure t)
+#+END_SRC
 ** Racket
 
 Setup [[https://github.com/greghendershott/racket-mode][major mode]] for [[https://racket-lang.org/][Racket]] source files and Racket REPL.
