@@ -11,7 +11,7 @@
  '(helm-boring-file-regexp-list (quote (".git")))
  '(package-selected-packages
 	(quote
-	 (haskell-mode projectile ivy dockerfile-mode protobuf-mode dashboard magit markdown-mode yaml-mode racket-mode helm-projectile unfill org-bullets go-guru yasnippet expand-region go-autocomplete auto-complete flycheck helm-swoop go-mode solidity-mode helm auctex counsel swiper try avy use-package which-key))))
+	 (hindent hindent-mode dracula-theme haskell-mode projectile ivy dockerfile-mode protobuf-mode dashboard magit markdown-mode yaml-mode racket-mode helm-projectile unfill org-bullets go-guru yasnippet expand-region go-autocomplete auto-complete flycheck helm-swoop go-mode solidity-mode helm auctex counsel swiper try avy use-package which-key))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
