@@ -174,6 +174,17 @@ Enables quick access to recent (previous/past) files.
 (recentf-mode 1)
 (global-set-key (kbd "C-x p") 'helm-recentf)
 #+END_SRC
+** Auto Insert 
+
+Default auto-insert settings when creating new buffers
+
+#+BEGIN_SRC emacs-lisp
+(auto-insert-mode)
+;;  Trailing slash important
+(setq auto-insert-directory "~/.emacs.d/templates/")
+;; Disable prompt before insertion
+(setq auto-insert-query nil)
+#+END_SRC
 * Basic Editing
 ** Highlight Current Line
 
@@ -331,6 +342,12 @@ Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-
   (setq org-ellipsis " ▾")
 )
 #+END_SRC
+
+Insert default header when creating new files
+
+#+BEGIN_SRC emacs-lisp
+(define-auto-insert "\.org" "default.org")
+#+END_SRC
 ** Markdown Mode
 
 Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
@@ -370,6 +387,8 @@ in Emacs.
 (use-package auto-complete
   :ensure t
   :init
+  :config
+  (setq ac-ignore-case nil)
   (progn 
      (ac-config-default))
 )
