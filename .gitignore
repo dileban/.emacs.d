@@ -27,3 +27,5 @@ transient/
 # ignore changes to env.el template
 env.el
 
+# ignore lsp files
+.lsp*
