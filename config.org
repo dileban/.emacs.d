@@ -308,6 +308,14 @@ other destinations.
 (use-package unfill
   :ensure t)
 #+END_SRC
+** Spell Checker
+
+See [[https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html][here]] for instructions on setting up hunspell
+
+#+BEGIN_SRC emacs-lisp
+(setq ispell-program-name (locate-file "hunspell"
+                exec-path exec-suffixes 'file-executable-p))
+#+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
 
@@ -383,14 +391,26 @@ languages.
 [[https://github.com/auto-complete/auto-complete][auto-complete]] enables auto-completion feature for various modes
 in Emacs. 
 
+# #+BEGIN_SRC emacs-lisp
+# (use-package auto-complete
+#   :ensure t
+#   :init
+#   :config
+#   (setq ac-ignore-case nil)
+#   (progn 
+#      (ac-config-default))
+# )
+# #+END_SRC
+
+[[https://company-mode.github.io/][company-mode]] for text completion in emacs.
+
 #+BEGIN_SRC emacs-lisp
-(use-package auto-complete
+(use-package company
   :ensure t
-  :init
   :config
-  (setq ac-ignore-case nil)
-  (progn 
-     (ac-config-default))
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 3)
+  (global-company-mode t)
 )
 #+END_SRC
 
@@ -470,11 +490,12 @@ NOTE: Go imports relies on existence of the GNU `diff` util in PATH.
 (use-package go-mode
   :ensure t
   :bind
-  ("M-." . godef-jump)
   :config
-  (progn 
-     (setq gofmt-command "goimports")     
-     (add-hook 'before-save-hook 'gofmt-before-save))
+  (add-hook 'go-mode-hook
+          (lambda () 
+			 ("M-." . godef-jump)
+			 (setq gofmt-command "goimports")
+			 (add-hook 'before-save-hook 'gofmt-before-save)))
 )
 #+END_SRC
 
@@ -512,6 +533,41 @@ Setup [[https://github.com/greghendershott/racket-mode][major mode]] for [[https
 #+BEGIN_SRC emacs-lisp
 (use-package racket-mode
   :ensure t)
+#+END_SRC
+** Rust
+
+Setup major mode for programming with Rust
+
+# #+BEGIN_SRC emacs-lisp
+# (use-package rustic)
+# #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode
+  :ensure t
+  :config
+  (setq rust-format-on-save t)
+  (add-hook 'rust-mode-hook
+          (lambda () 
+			 (setq indent-tabs-mode nil)
+			 (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)))
+)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-mode
+  :hook(
+  (rust-mode . lsp)
+  (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package cargo
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode)
+)
 #+END_SRC
 ** Yaml
 
