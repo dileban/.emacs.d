@@ -493,7 +493,7 @@ NOTE: Go imports relies on existence of the GNU `diff` util in PATH.
   :config
   (add-hook 'go-mode-hook
           (lambda () 
-			 ("M-." . godef-jump)
+			 (define-key go-mode-map (kbd "M-.") 'godef-jump)
 			 (setq gofmt-command "goimports")
 			 (add-hook 'before-save-hook 'gofmt-before-save)))
 )
