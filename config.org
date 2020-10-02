@@ -202,6 +202,26 @@ Scroll text in current window one line at a time.
 (global-set-key (kbd "C-0") (lambda ()(interactive)(scroll-down 1)))
 (global-set-key (kbd "C-9") (lambda ()(interactive)(scroll-up 1)))
 #+END_SRC
+** Insert Line Above Point
+
+Insert line above point and moves point above with proper
+indentation. Primarily intended for use while coding. Source: [[https://www.emacswiki.org/emacs/OpenNextLine][Emacs
+Wiki]].
+
+#+BEGIN_SRC emacs-lisp
+(defun open-previous-line (arg)
+   "Open a new line before the current one. 
+   See also `newline-and-indent'."
+   (interactive "p")
+   (beginning-of-line)
+   (open-line arg)
+   (when newline-and-indent
+   (indent-according-to-mode)))
+
+(global-set-key (kbd "M-o") 'open-previous-line)
+(defvar newline-and-indent t)
+#+END_SRC
+
 ** Moving Point Quickly Within Screen Area
 
 Moves point quickly within the visible screen area.
