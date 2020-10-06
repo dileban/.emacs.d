@@ -202,6 +202,22 @@ Scroll text in current window one line at a time.
 (global-set-key (kbd "C-0") (lambda ()(interactive)(scroll-down 1)))
 (global-set-key (kbd "C-9") (lambda ()(interactive)(scroll-up 1)))
 #+END_SRC
+** Multiple Cursors
+
+[[https://github.com/magnars/multiple-cursors.el][Multiple cursors]] for uber text manipulation. Also see [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][John Wiegley]]'s
+configuration for interesting workflows.
+
+#+BEGIN_SRC emacs-lisp
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ("C-S-c C-S-c" . 'mc/edit-lines)
+  ("C->" . 'mc/mark-next-like-this)
+  ("C-<" . 'mc/mark-previous-like-this)
+  ("C-c C-<" . 'mc/mark-all-like-this)
+)
+#+END_SRC
+
 ** Insert Line Above Point
 
 Insert line above point and moves point above with proper
@@ -209,17 +225,17 @@ indentation. Primarily intended for use while coding. Source: [[https://www.emac
 Wiki]].
 
 #+BEGIN_SRC emacs-lisp
-(defun open-previous-line (arg)
-   "Open a new line before the current one. 
-   See also `newline-and-indent'."
-   (interactive "p")
-   (beginning-of-line)
-   (open-line arg)
-   (when newline-and-indent
-   (indent-according-to-mode)))
+  (defun open-previous-line (arg)
+	  "Open a new line before the current one. 
+	  See also `newline-and-indent'."
+	  (interactive "p")
+	  (beginning-of-line)
+	  (open-line arg)
+	  (when newline-and-indent
+	  (indent-according-to-mode)))
 
-(global-set-key (kbd "M-o") 'open-previous-line)
-(defvar newline-and-indent t)
+  (global-set-key (kbd "M-o") 'open-previous-line)
+  (defvar newline-and-indent t)
 #+END_SRC
 
 ** Moving Point Quickly Within Screen Area
