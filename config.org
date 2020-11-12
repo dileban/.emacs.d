@@ -67,7 +67,7 @@ Load system dependent variables from env.el.
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 ** Display Current Time
-
+	
 #+BEGIN_SRC emacs-lisp
 (display-time-mode t)
 #+END_SRC
@@ -94,17 +94,18 @@ Load system dependent variables from env.el.
 #+END_SRC
 ** Theme
 
-#+BEGIN_SRC emacs-lisp
-  ;; (use-package solarized-theme
-  ;;   :ensure t
-  ;;   :config
-  ;;   (load-theme 'solarized-dark)
-  ;; )
-#+END_SRC
+See [[https://emacsthemes.com/][Emacs Themes]] for a collection of themes.
 
 #+BEGIN_SRC emacs-lisp
+		;; (use-package solarized-theme
+		;;   :ensure t
+		;;   :config
+		;;   (load-theme 'solarized-dark)
+		;; )
+
 (use-package dracula-theme
-  :ensure t)
+ 	:ensure t)
+
 #+END_SRC
 ** Dashboard
 
@@ -121,6 +122,12 @@ Load system dependent variables from env.el.
 		  (projects . 5)))
 )
 #+END_SRC
+** Save/Restore Desktop 
+
+#+BEGIN_SRC emacs-lisp
+(desktop-save-mode 1)
+#+END_SRC
+
 * Key Management
 ** Assitance for key completions
 
@@ -216,26 +223,6 @@ configuration for interesting workflows.
   ("C-<" . 'mc/mark-previous-like-this)
   ("C-c C-<" . 'mc/mark-all-like-this)
 )
-#+END_SRC
-
-** Insert Line Above Point
-
-Insert line above point and moves point above with proper
-indentation. Primarily intended for use while coding. Source: [[https://www.emacswiki.org/emacs/OpenNextLine][Emacs
-Wiki]].
-
-#+BEGIN_SRC emacs-lisp
-  (defun open-previous-line (arg)
-	  "Open a new line before the current one. 
-	  See also `newline-and-indent'."
-	  (interactive "p")
-	  (beginning-of-line)
-	  (open-line arg)
-	  (when newline-and-indent
-	  (indent-according-to-mode)))
-
-  (global-set-key (kbd "M-o") 'open-previous-line)
-  (defvar newline-and-indent t)
 #+END_SRC
 
 ** Moving Point Quickly Within Screen Area
@@ -352,6 +339,44 @@ See [[https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html][h
 (setq ispell-program-name (locate-file "hunspell"
                 exec-path exec-suffixes 'file-executable-p))
 #+END_SRC
+** Crux 
+
+[[https://github.com/bbatsov/crux][Crux]] provides an number of useful productivity features. The followig
+are being used here:
+
++ Smarter move to begining of line
++ Smarter opening of new line
++ Killing lines backwards
+
+#+BEGIN_SRC emacs-lisp
+(use-package crux
+  :ensure t
+  :bind 
+    ("M-o" . crux-smart-open-line-above)
+    ("C-<backspace>" . crux-kill-line-backwards)
+	 ([remap move-beginning-of-line] . crux-move-beginning-of-line)
+)
+
+#+END_SRC
+
+# Insert line above point and moves point above with proper
+# indentation. Primarily intended for use while coding. Source: [[https://www.emacswiki.org/emacs/OpenNextLine][Emacs
+# Wiki]].
+
+# #+BEGIN_SRC emacs-lisp
+#   (defun open-previous-line (arg)
+# 	  "Open a new line before the current one. 
+# 	  See also `newline-and-indent'."
+# 	  (interactive "p")
+# 	  (beginning-of-line)
+# 	  (open-line arg)
+# 	  (when newline-and-indent
+# 	  (indent-according-to-mode)))
+
+#   (global-set-key (kbd "M-o") 'open-previous-line)
+#   (defvar newline-and-indent t)
+# #+END_SRC
+
 * Typesetting Systems
 ** Document Preparation with LaTex
 

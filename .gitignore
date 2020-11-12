@@ -14,12 +14,14 @@ projectile*
 # others
 ido.last
 ac-comphist.dat
+.emacs.desktop*
 url/
 eshell/
 bookmarks
 recentf
 server/
 transient/
+fonts/
 
 # multiple-cursors
 .mc-lists.el
