@@ -148,6 +148,19 @@ commands.
 (setq auto-save-default nil)
 #+END_SRC
 * File and Buffer Management
+** Dired
+
+#+BEGIN_SRC emacs-lisp
+(setq dired-listing-switches "-al")
+(global-set-key (kbd "C-c j") 'dired-jump)
+
+(use-package dired
+:bind (:map dired-mode-map
+         ("u" . dired-up-directory)
+         ("i" . dired-previous-line)
+         ("k" . dired-next-line))
+)
+#+END_SRC
 ** Preferred Coding System
 
 Default all new buffers to the UTF-8 coding system.
