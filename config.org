@@ -390,6 +390,17 @@ are being used here:
 #   (defvar newline-and-indent t)
 # #+END_SRC
 
+** Highlight indentation
+
+Enables visual cues for indentation
+
+#+BEGIN_SRC emacs-lisp
+(use-package highlight-indent-guides
+  :ensure t
+  :config
+  (setq highlight-indent-guides-method 'character)
+)
+#+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
 
@@ -653,7 +664,9 @@ Setup [[https://github.com/yoshiki/yaml-mode][major mode]] for editing YAML file
   :config 
   (add-hook 'yaml-mode-hook
       '(lambda ()
-         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+         (define-key yaml-mode-map "\C-m" 'newline-and-indent)
+			(setq highlight-indent-guides-mode t)
+)))
 #+END_SRC
 * References
 
