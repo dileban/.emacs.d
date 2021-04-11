@@ -147,6 +147,19 @@ commands.
 (setq auto-save-default nil)
 #+END_SRC
 * File and Buffer Management
+** Default Encoding System
+
+Default all new buffers to the utf-8-unix encoding.
+Also applies to creating new files with C-x C-f.
+
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
+(setq-default buffer-file-coding-system 'utf-8-unix)
+#+END_SRC
+
 ** Dired
 
 #+BEGIN_SRC emacs-lisp
@@ -159,14 +172,6 @@ commands.
          ("i" . dired-previous-line)
          ("k" . dired-next-line))
 )
-#+END_SRC
-** Preferred Coding System
-
-Default all new buffers to the UTF-8 coding system.
-Also applies to creating new files with C-x C-f.
-
-#+BEGIN_SRC emacs-lisp
-(prefer-coding-system 'utf-8)
 #+END_SRC
 ** Killing Buffers
 
@@ -677,3 +682,5 @@ List of emacs configurations for inspiration
 + [[https://github.com/bbatsov/emacs.d/blob/master/init.el][Bozhidar Batsov]]
 + [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][John Wiegley]]
 + [[https://github.com/abo-abo/oremacs][Oleh Krehel (abo abo)]]
+
+
