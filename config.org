@@ -661,12 +661,11 @@ Setup [[https://github.com/yoshiki/yaml-mode][major mode]] for editing YAML file
 #+BEGIN_SRC emacs-lisp
 (use-package yaml-mode
   :ensure t
+  :mode "\\.ya?ml\\'"
   :config 
-  (add-hook 'yaml-mode-hook
-      '(lambda ()
-         (define-key yaml-mode-map "\C-m" 'newline-and-indent)
-			(setq highlight-indent-guides-mode t)
-)))
+  (define-key yaml-mode-map "\C-m" #'newline-and-indent)
+  (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
+)
 #+END_SRC
 * References
 
