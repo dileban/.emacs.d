@@ -454,7 +454,27 @@ Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode))
-  :init (setq markdown-command (getenv "MDCMD"))
+  :init
+  (setq markdown-home
+      (concat "file:///"
+              (file-name-directory user-init-file)
+              "markdown/"))
+  (setq markdown-command (getenv "MDCMD"))
+  (setq markdown-css-paths
+      (list (concat markdown-home "github.css")))
+  (setq markdown-xhtml-header-content
+      (concat "<style>"
+              " .markdown-body {"
+              "   box-sizing: border-box;"
+              "   min-width: 200px;"
+              "   max-width: 980px;"
+              "   margin: 0 auto;"
+				  "   padding: 45px;"
+				  " }"
+              "</style>"
+				  "<script src='"
+              markdown-home
+              "github.js' defer></script>"))
 )
 #+END_SRC
 * Programming
