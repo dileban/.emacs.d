@@ -9,10 +9,10 @@ Emacs configuration specified in [[https://en.wikipedia.org/wiki/Literate_progra
 List of default package repositories to search from.
 
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+  (require 'package)
+  (setq package-archives
+		  '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
 #+END_SRC
 
 ** Import Package Install Utility
@@ -23,25 +23,25 @@ as opposed to separate these activities in two different parts of
 the file.
 
 #+BEGIN_SRC emacs-lisp
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+  (unless (package-installed-p 'use-package)
+	 (package-refresh-contents)
+	 (package-install 'use-package))
 #+END_SRC
 ** Try Package Before Installing
 
 Utility for trying packages before installing.
 
 #+BEGIN_SRC emacs-lisp
-(use-package try
-	:ensure t)
+  (use-package try
+	 :ensure t)
 #+END_SRC
 ** Customizations
 
 Save all custom-settings to a separate file
 
 #+BEGIN_SRC emacs-lisp
-(setq custom-file "~/.emacs.d/custom-settings.el")
-(load custom-file t)
+  (setq custom-file "~/.emacs.d/custom-settings.el")
+  (load custom-file t)
 #+END_SRC
 * Environment
 ** Using Environment Variables 
@@ -49,9 +49,9 @@ Save all custom-settings to a separate file
 Load system dependent variables from env.el. 
 
 #+BEGIN_SRC emacs-lisp
-(defvar env-file "~/.emacs.d/env.el")
-(when (file-exists-p env-file)
-  (load-file env-file))
+  (defvar env-file "~/.emacs.d/env.el")
+  (when (file-exists-p env-file)
+	 (load-file env-file))
 #+END_SRC
 * Default Appearance
 ** Inhibit Startup Screen and Message
@@ -63,47 +63,55 @@ Load system dependent variables from env.el.
 ** Yes/No to Y/N
 
 #+BEGIN_SRC emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 ** Display Current Time
 	
 #+BEGIN_SRC emacs-lisp
-(display-time-mode t)
+  (display-time-mode t)
 #+END_SRC
 ** Tab Width
 
 #+BEGIN_SRC emacs-lisp
-(setq-default tab-width 3)
+  (setq-default tab-width 3)
 #+END_SRC
 ** Hide Tool Bar
 
 #+BEGIN_SRC emacs-lisp
-(tool-bar-mode 0)
+  (tool-bar-mode 0)
 #+END_SRC
 ** Hide Menu Bar
 
 #+BEGIN_SRC emacs-lisp
-(menu-bar-mode 0)
+  (menu-bar-mode 0)
 #+END_SRC
 
 ** Disable Scroll Bars
 
 #+BEGIN_SRC emacs-lisp
-(scroll-bar-mode 0)
+  (scroll-bar-mode 0)
 #+END_SRC
 ** Theme
 
 See [[https://emacsthemes.com/][Emacs Themes]] for a collection of themes.
 
 #+BEGIN_SRC emacs-lisp
-		;; (use-package solarized-theme
-		;;   :ensure t
-		;;   :config
-		;;   (load-theme 'solarized-dark)
-		;; )
+  ;; (use-package solarized-theme
+  ;;   :ensure t
+  ;;   :config
+  ;;   (load-theme 'solarized-dark)
+  ;; )
 
-(use-package dracula-theme
- 	:ensure t)
+  ;; (use-package dracula-theme
+  ;;   :ensure t
+  ;;   :config
+  ;;   (load-theme 'dracula)
+  ;; )
+
+  (use-package base16-theme
+	 :ensure t
+	 :config
+	 (load-theme 'base16-railscasts))
 
 #+END_SRC
 ** Dashboard
@@ -111,20 +119,20 @@ See [[https://emacsthemes.com/][Emacs Themes]] for a collection of themes.
 [[https://github.com/rakanalh/emacs-dashboard][Emacs Dashboard]] provides a startup screen with important locations.
 
 #+BEGIN_SRC emacs-lisp
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '(
-        (recents  . 5)
-        (bookmarks . 5)
-		  (projects . 5)))
-)
+  (use-package dashboard
+	 :ensure t
+	 :config
+	 (dashboard-setup-startup-hook)
+	 (setq
+	  dashboard-items
+	  '((recents . 5)
+		 (bookmarks . 5)
+		 (projects . 5))))
 #+END_SRC
 ** Save/Restore Desktop 
 
 #+BEGIN_SRC emacs-lisp
-(desktop-save-mode 1)
+  (desktop-save-mode 1)
 #+END_SRC
 
 * Key Management
@@ -134,17 +142,17 @@ See [[https://emacsthemes.com/][Emacs Themes]] for a collection of themes.
 commands.
 
 #+BEGIN_SRC emacs-lisp
-(use-package which-key
-  :ensure t
-  :config
-    (which-key-mode))
+  (use-package which-key
+	 :ensure t
+	 :config
+	 (which-key-mode))
 #+END_SRC
 * Backup Settings
 ** Disable Backups and Auto-Saves
 
 #+BEGIN_SRC emacs-lisp
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
 #+END_SRC
 * File and Buffer Management
 ** Default Encoding System
@@ -153,61 +161,62 @@ Default all new buffers to the utf-8-unix encoding.
 Also applies to creating new files with C-x C-f.
 
 #+BEGIN_SRC emacs-lisp
-(prefer-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8-unix)
-(set-terminal-coding-system 'utf-8-unix)
-(set-keyboard-coding-system 'utf-8-unix)
-(setq-default buffer-file-coding-system 'utf-8-unix)
+  (prefer-coding-system 'utf-8-unix)
+  (set-default-coding-systems 'utf-8-unix)
+  (set-terminal-coding-system 'utf-8-unix)
+  (set-keyboard-coding-system 'utf-8-unix)
+  (setq-default buffer-file-coding-system 'utf-8-unix)
 #+END_SRC
 
 ** Dired
 
 #+BEGIN_SRC emacs-lisp
-(setq dired-listing-switches "-al")
-(global-set-key (kbd "C-c j") 'dired-jump)
+  (setq dired-listing-switches "-al")
+  (global-set-key (kbd "C-c d") 'dired-jump)
 
-(use-package dired
-:bind (:map dired-mode-map
-         ("u" . dired-up-directory)
-         ("i" . dired-previous-line)
-         ("k" . dired-next-line))
-)
+  (use-package dired
+	 :bind
+	 (:map
+	  dired-mode-map
+	  ("u" . dired-up-directory)
+	  ("i" . dired-previous-line)
+	  ("k" . dired-next-line)))
 #+END_SRC
 ** Killing Buffers
 
 Kill current buffer without prompting for buffer name.
 
 #+BEGIN_SRC emacs-lisp
-(defun kill-current-buffer ()
-  "Kills the current buffer."
-  (interactive)
-  (kill-buffer (current-buffer)))
-(global-set-key (kbd "C-x k") 'kill-current-buffer)
+  (defun kill-current-buffer ()
+	 "Kills the current buffer."
+	 (interactive)
+	 (kill-buffer (current-buffer)))
+  (global-set-key (kbd "C-x k") 'kill-current-buffer)
 #+END_SRC
 
 ** Enable 'ibuffers' by Default
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 ** Recent Files
 
 Enables quick access to recent (previous/past) files.
 
 #+BEGIN_SRC emacs-lisp
-(recentf-mode 1)
-(global-set-key (kbd "C-x p") 'helm-recentf)
+  (recentf-mode 1)
+  (global-set-key (kbd "C-x p") 'helm-recentf)
 #+END_SRC
 ** Auto Insert 
 
 Default auto-insert settings when creating new buffers
 
 #+BEGIN_SRC emacs-lisp
-(auto-insert-mode)
-;;  Trailing slash important
-(setq auto-insert-directory "~/.emacs.d/templates/")
-;; Disable prompt before insertion
-(setq auto-insert-query nil)
+  (auto-insert-mode)
+  ;;  Trailing slash important
+  (setq auto-insert-directory "~/.emacs.d/templates/")
+  ;; Disable prompt before insertion
+  (setq auto-insert-query nil)
 #+END_SRC
 * Basic Editing
 ** Highlight Current Line
@@ -216,15 +225,15 @@ Highlights current line when using the windowing system.
 Not enabled for command line.
 
 #+BEGIN_SRC emacs-lisp
-(when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
+  (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 #+END_SRC
 ** Text Scrolling
 
 Scroll text in current window one line at a time.
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-0") (lambda ()(interactive)(scroll-down 1)))
-(global-set-key (kbd "C-9") (lambda ()(interactive)(scroll-up 1)))
+  (global-set-key (kbd "C-0") (lambda () (interactive) (scroll-down 1)))
+  (global-set-key (kbd "C-9") (lambda () (interactive) (scroll-up 1)))
 #+END_SRC
 ** Multiple Cursors
 
@@ -232,14 +241,13 @@ Scroll text in current window one line at a time.
 configuration for interesting workflows.
 
 #+BEGIN_SRC emacs-lisp
-(use-package multiple-cursors
-  :ensure t
-  :bind
-  ("C-S-c C-S-c" . 'mc/edit-lines)
-  ("C->" . 'mc/mark-next-like-this)
-  ("C-<" . 'mc/mark-previous-like-this)
-  ("C-c C-<" . 'mc/mark-all-like-this)
-)
+  (use-package multiple-cursors
+	 :ensure t
+	 :bind
+	 ("C-S-c C-S-c" . 'mc/edit-lines)
+	 ("C->" . 'mc/mark-next-like-this)
+	 ("C-<" . 'mc/mark-previous-like-this)
+	 ("C-c C-<" . 'mc/mark-all-like-this))
 #+END_SRC
 
 ** Moving Point Quickly Within Screen Area
@@ -247,9 +255,9 @@ configuration for interesting workflows.
 Moves point quickly within the visible screen area.
 
 #+BEGIN_SRC emacs-lisp
-(use-package avy
-   :ensure t
-   :bind ("M-s" . avy-goto-char))
+  (use-package avy
+	 :ensure t
+	 :bind ("M-s" . avy-goto-char))
 #+END_SRC
 ** Finding Stuff
 
@@ -271,19 +279,20 @@ convenient overview of all matches.
 convenient overview of all matches.
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-swoop
-  :ensure t
-  :bind ("C-s" . helm-swoop-without-pre-input)
-  :config
-  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
-  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
-  (setq helm-swoop-use-line-number-face t)
-  (set-face-attribute 'helm-swoop-target-word-face nil 
-      :weight 'bold
-      :foreground "deep pink")
-)
+  (use-package helm-swoop
+	 :ensure t
+	 :bind ("C-s" . helm-swoop-without-pre-input)
+	 :config
+	 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+	 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+	 (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+	 (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+	 (setq helm-swoop-use-line-number-face t)
+	 (setq helm-swoop-split-with-multiple-windows t)
+	 (set-face-attribute
+	  'helm-swoop-target-word-face nil
+	  :weight 'bold
+	  :foreground "deep pink"))
 #+END_SRC
 
 Ivy is a generic completion system for Emacs, while Counsel builds 
@@ -292,52 +301,55 @@ This enhances searchability of buffers, files, commands, functions,
 variables, etc.
 
 #+BEGIN_SRC emacs-lisp
-(use-package ivy
-  :ensure t
-  :config
-  (ivy-mode 1))
+  (use-package ivy
+	 :ensure t
+	 :config
+	 (ivy-mode 1))
 
-(use-package counsel
-  :ensure t
-  :bind 
-  (("M-y" . counsel-yank-pop)
-    :map ivy-minibuffer-map
-    ("M-y" . ivy-next-line)))
+  (use-package counsel
+	 :ensure t
+	 :bind
+	 (("M-y" . counsel-yank-pop)
+	  :map ivy-minibuffer-map
+	  ("M-y" . ivy-next-line)))
 #+END_SRC
 
 Override default bindings added by Counsel with Helm for M-x, finding
 files, buffers, and bookmarks.
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm
-  :ensure t
-  :bind 
-  ("M-x" . helm-M-x)
-  ("C-x C-f" . helm-find-files)
-  ("C-x C-b" . helm-buffers-list)
-  ("C-x b" . helm-buffers-list)
-  ("C-x r b" . helm-bookmarks)
-  :config
-  (setq helm-autoresize-max-height 30
-        helm-autoresize-min-height 30)
-  (helm-autoresize-mode 1)
-  (set-face-attribute 'helm-selection nil 
-      :background "violet red"
-      :foreground "white")
-)
+  (use-package helm
+	 :ensure t
+	 :bind
+	 ("M-x" . helm-M-x)
+	 ("C-x C-f" . helm-find-files)
+	 ("C-x C-b" . helm-buffers-list)
+	 ("C-x b" . helm-buffers-list)
+	 ("C-x r b" . helm-bookmarks)
+	 :config
+	 (setq
+	  helm-autoresize-max-height 30
+	  helm-autoresize-min-height 30
+	  helm-split-window-inside-p t) ; https://github.com/Alexander-Miller/treemacs/issues/808
+	 (helm-autoresize-mode 1)
+	 (set-face-attribute
+	  'helm-selection nil
+	  :background "violet red"
+	  :foreground "white")
+	 (global-set-key (kbd "C-h v") 'helm-apropos)
+	 (global-set-key (kbd "C-h f") 'helm-apropos))
 #+END_SRC
 ** Expand Region and Replace
 
 Expand region and replace
 
 #+BEGIN_SRC emacs-lisp
-(use-package expand-region
-  :ensure t
-  :bind
-  ("C-`" . er/expand-region)
-  :config
-  (pending-delete-mode t)
-)
+  (use-package expand-region
+	 :ensure t
+	 :bind
+	 ("C-`" . er/expand-region)
+	 :config
+	 (pending-delete-mode t))
 #+END_SRC
 ** Unfil Region
 
@@ -345,16 +357,21 @@ The reverse of fill-region. Useful when copying text from emacs to
 other destinations.
 
 #+BEGIN_SRC emacs-lisp
-(use-package unfill
-  :ensure t)
+  (use-package unfill
+	 :ensure t)
 #+END_SRC
 ** Spell Checker
 
 See [[https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html][here]] for instructions on setting up hunspell
 
 #+BEGIN_SRC emacs-lisp
-(setq ispell-program-name (locate-file "hunspell"
-                exec-path exec-suffixes 'file-executable-p))
+  (setq
+	ispell-program-name
+	(locate-file
+	 "hunspell"
+	 exec-path exec-suffixes
+	 'file-executable-p))
+  (global-set-key (kbd "C-c s") 'ispell-word)
 #+END_SRC
 ** Crux 
 
@@ -366,13 +383,12 @@ are being used here:
 + Killing lines backwards
 
 #+BEGIN_SRC emacs-lisp
-(use-package crux
-  :ensure t
-  :bind 
-    ("M-o" . crux-smart-open-line-above)
-    ("C-<backspace>" . crux-kill-line-backwards)
-	 ([remap move-beginning-of-line] . crux-move-beginning-of-line)
-)
+  (use-package crux
+	 :ensure t
+	 :bind
+	 ("M-o" . crux-smart-open-line-above)
+	 ("C-<backspace>" . crux-kill-line-backwards)
+	 ([remap move-beginning-of-line] . crux-move-beginning-of-line))
 
 #+END_SRC
 
@@ -399,11 +415,14 @@ are being used here:
 Enables visual cues for indentation
 
 #+BEGIN_SRC emacs-lisp
-(use-package highlight-indent-guides
-  :ensure t
-  :config
-  (setq highlight-indent-guides-method 'character)
-)
+  (use-package highlight-indent-guides
+	 :ensure t
+	 :config
+	 (setq highlight-indent-guides-method 'character))
+#+END_SRC
+** Jump between multiple windows
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c w") 'ace-window)
 #+END_SRC
 * Typesetting Systems
 ** Document Preparation with LaTex
@@ -419,63 +438,62 @@ Helpful links:
  
 
 #+BEGIN_SRC emacs-lisp
-(use-package auctex
-  :ensure t
-  :mode ("\\.tex\\'" . TeX-latex-mode)
-)
+  (use-package auctex
+	 :ensure t
+	 :mode ("\\.tex\\'" . TeX-latex-mode))
 #+END_SRC
 ** Org Mode
 
 Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-your-org-agenda/][this]]. For a list of symbols see [[https://www.w3schools.com/charsets/ref_html_entities_4.asp][here]].
 
 #+BEGIN_SRC emacs-lisp
-(use-package org-bullets
-  :ensure t
-  :init
-  (setq org-bullets-bullet-list
-      '("◉" "●" "○" "▪" "▪"))
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-ellipsis " ▾")
-)
+  (use-package org-bullets
+	 :ensure t
+	 :init
+	 (setq org-bullets-bullet-list
+			 '("◉" "●" "○" "▪" "▪"))
+	 :config
+	 (add-hook
+	  'org-mode-hook
+	  (lambda () (org-bullets-mode 1)))
+	 (setq org-ellipsis " ▾"))
 #+END_SRC
 
 Insert default header when creating new files
 
 #+BEGIN_SRC emacs-lisp
-(define-auto-insert "\.org" "default.org")
+  (define-auto-insert "\.org" "default.org")
 #+END_SRC
-** Markdown Mode
+** COMMENT Markdown Mode
 
 Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
 
 #+BEGIN_SRC emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode))
-  :init
-  (setq markdown-home
-      (concat "file:///"
-              (file-name-directory user-init-file)
-              "markdown/"))
-  (setq markdown-command (getenv "MDCMD"))
-  (setq markdown-css-paths
-      (list (concat markdown-home "github.css")))
-  (setq markdown-xhtml-header-content
-      (concat "<style>"
-              " .markdown-body {"
-              "   box-sizing: border-box;"
-              "   min-width: 200px;"
-              "   max-width: 980px;"
-              "   margin: 0 auto;"
-				  "   padding: 45px;"
-				  " }"
-              "</style>"
-				  "<script src='"
-              markdown-home
-              "github.js' defer></script>"))
-)
+  (use-package markdown-mode
+	 :ensure t
+	 :commands (markdown-mode gfm-mode)
+	 :mode (("README\\.md\\'" . gfm-mode))
+	 :init
+	 (setq markdown-home
+			 (concat "file:///"
+						(file-name-directory user-init-file)
+						"markdown/"))
+	 (setq markdown-command (getenv "MDCMD"))
+	 (setq markdown-css-paths
+			 (list (concat markdown-home "github.css")))
+	 (setq markdown-xhtml-header-content
+			 (concat "<style>"
+						" .markdown-body {"
+						"   box-sizing: border-box;"
+						"   min-width: 200px;"
+						"   max-width: 980px;"
+						"   margin: 0 auto;"
+						"   padding: 45px;"
+						" }"
+						"</style>"
+						"<script src='"
+						markdown-home
+						"github.js' defer></script>")))
 #+END_SRC
 * Programming
 ** General
@@ -484,17 +502,17 @@ Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
 languages.
 
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+  (use-package flycheck
+	 :ensure t
+	 :init (global-flycheck-mode))
 #+END_SRC
 
 [[https://github.com/joaotavora/yasnippet][yasnippet]] template system for convenient expansions.
 #+BEGIN_SRC emacs-lisp
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode t))
+  (use-package yasnippet
+	 :ensure t
+	 :config
+	 (yas-global-mode t))
 #+END_SRC
 
 [[https://github.com/auto-complete/auto-complete][auto-complete]] enables auto-completion feature for various modes
@@ -514,20 +532,45 @@ in Emacs.
 [[https://company-mode.github.io/][company-mode]] for text completion in emacs.
 
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :ensure t
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 3)
-  (global-company-mode t)
-)
+  (use-package company
+	 :ensure t
+	 :config
+	 (setq company-idle-delay 0)
+	 (setq company-minimum-prefix-length 3)
+	 (global-company-mode t))
 #+END_SRC
 
 Show matching parentheses.
 
 #+BEGIN_SRC emacs-lisp
-(show-paren-mode 1)
+  (show-paren-mode 1)
 #+END_SRC
+
+** Language Server Protocol
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+	 :init
+	 (setq lsp-keymap-prefix "C-c l")
+	 :hook
+	 ((rust-mode . lsp)
+	  (lsp-mode . lsp-enable-which-key-integration))
+	 :commands lsp)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-ui
+	 :config
+	 (setq lsp-ui-doc-delay 1))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-treemacs
+	 :ensure t
+	 :config
+	 (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
+#+END_SRC
+
 
 ** Working with Projects
 
@@ -535,52 +578,51 @@ Show matching parentheses.
 with projects (e.g. any directory with .git) easy. 
 
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
-  :ensure t
-  :init
-    (projectile-mode 1)
-  :config
-  (setq projectile-completion-system 'helm)
-  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map))
+  (use-package projectile
+	 :ensure t
+	 :init
+	 (projectile-mode 1)
+	 :config
+	 (setq projectile-completion-system 'helm)
+	 (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map))
 #+END_SRC
 
 [[https://github.com/bbatsov/helm-projectile][helm-projectile]] is helm mode for projectile. 
 
 #+BEGIN_SRC emacs-lisp
-(use-package helm-projectile
-  :ensure t
-  :init
-  (helm-projectile-on))
+  (use-package helm-projectile
+	 :ensure t
+	 :init
+	 (helm-projectile-on))
 #+END_SRC
 ** Magit
 
 [[https://magit.vc/][Magit]] is a Git porcelain for Emacs.
 
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-  :ensure t
-  :config 
-  (setq magit-push-always-verify nil)
-)
+  (use-package magit
+	 :ensure t
+	 :config
+	 (setq magit-push-always-verify nil))
 #+END_SRC
 ** Docker
 
 #+BEGIN_SRC emacs-lisp
-(use-package dockerfile-mode
-  :ensure t)
+  (use-package dockerfile-mode
+	 :ensure t)
 #+END_SRC
 
 ** Protocol Buffers
 
 #+BEGIN_SRC emacs-lisp
-(use-package protobuf-mode
-  :ensure t)
+  (use-package protobuf-mode
+	 :ensure t)
 #+END_SRC
 ** Solidity
 
 #+BEGIN_SRC emacs-lisp
-(use-package solidity-mode
-  :ensure t)
+  (use-package solidity-mode
+	 :ensure t)
 #+END_SRC
 ** Golang
 
@@ -596,52 +638,52 @@ install the following tools and ensure they are availalbe in the PATH:
 NOTE: Go imports relies on existence of the GNU `diff` util in PATH.
 
 #+BEGIN_SRC emacs-lisp
-(use-package go-mode
-  :ensure t
-  :bind
-  :config
-  (add-hook 'go-mode-hook
-          (lambda () 
-			 (define-key go-mode-map (kbd "M-.") 'godef-jump)
-			 (setq gofmt-command "goimports")
-			 (add-hook 'before-save-hook 'gofmt-before-save)))
-)
+  (use-package go-mode
+	 :ensure t
+	 :bind
+	 :config
+	 (add-hook
+	  'go-mode-hook
+	  (lambda ()
+		 (define-key go-mode-map (kbd "M-.") 'godef-jump)
+		 (setq gofmt-command "goimports")
+		 (add-hook 'before-save-hook 'gofmt-before-save))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package go-guru
-  :ensure t)
+  (use-package go-guru
+	 :ensure t)
 #+END_SRC
 
 To get auto complete working, install [[https://github.com/nsf/gocode][gocode]] along with 
 [[https://github.com/auto-complete/auto-complete][auto-complete]] (see above) and [[https://github.com/nsf/gocode/tree/master/emacs][go-autocomplete]].
 
 #+BEGIN_SRC emacs-lisp
-(use-package go-autocomplete
-  :ensure t)
+  (use-package go-autocomplete
+	 :ensure t)
 #+END_SRC
 ** Haskell
 
 + [[https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md][Haskell for Emacs]] - Useful instructions for setting up Haskell for Emacs.
 
 #+BEGIN_SRC emacs-lisp
-(use-package haskell-mode
-  :ensure t)
-(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+  (use-package haskell-mode
+	 :ensure t)
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package hindent
-  :ensure t)
-(add-hook 'haskell-mode-hook #'hindent-mode)
+  (use-package hindent
+	 :ensure t)
+  (add-hook 'haskell-mode-hook #'hindent-mode)
 #+END_SRC
 ** Racket
 
 Setup [[https://github.com/greghendershott/racket-mode][major mode]] for [[https://racket-lang.org/][Racket]] source files and Racket REPL.
 
 #+BEGIN_SRC emacs-lisp
-(use-package racket-mode
-  :ensure t)
+  (use-package racket-mode
+	 :ensure t)
 #+END_SRC
 ** Rust
 
@@ -652,44 +694,35 @@ Setup major mode for programming with Rust
 # #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package rust-mode
-  :ensure t
-  :config
-  (setq rust-format-on-save t)
-  (add-hook 'rust-mode-hook
-          (lambda () 
-			 (setq indent-tabs-mode nil)
-			 (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)))
-)
+  (use-package rust-mode
+	 :ensure t
+	 :config
+	 (setq rust-format-on-save t)
+	 (add-hook
+	  'rust-mode-hook
+	  (lambda ()
+		 (setq indent-tabs-mode nil)
+		 (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)
+		 (display-line-numbers-mode t))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package lsp-mode
-  :hook(
-  (rust-mode . lsp)
-  (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package cargo
-  :ensure t
-  :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode)
-)
+  (use-package cargo
+	 :ensure t
+	 :config
+	 (add-hook 'rust-mode-hook 'cargo-minor-mode))
 #+END_SRC
 ** Yaml
 
 Setup [[https://github.com/yoshiki/yaml-mode][major mode]] for editing YAML files.
 
 #+BEGIN_SRC emacs-lisp
-(use-package yaml-mode
-  :ensure t
-  :mode "\\.ya?ml\\'"
-  :config 
-  (define-key yaml-mode-map "\C-m" #'newline-and-indent)
-  (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode)
-)
+  (use-package yaml-mode
+	 :ensure t
+	 :mode "\\.ya?ml\\'"
+	 :config
+	 (define-key yaml-mode-map "\C-m" #'newline-and-indent)
+	 (add-hook 'yaml-mode-hook #'highlight-indent-guides-mode))
 #+END_SRC
 * References
 
