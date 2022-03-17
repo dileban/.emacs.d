@@ -31,3 +31,7 @@ env.el
 
 # ignore lsp files
 .lsp*
+
+# roam
+.org-id-locations
+org-roam.db

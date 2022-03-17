@@ -44,7 +44,12 @@ Save all custom-settings to a separate file
   (load custom-file t)
 #+END_SRC
 * Environment
-** Using Environment Variables 
+** Environment Variables 
+
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Dileban Karunamoorthy")
+  (setq user-mail-address "dileban@gmail.com")
+#+END_SRC
 
 Load system dependent variables from env.el. 
 
@@ -53,6 +58,7 @@ Load system dependent variables from env.el.
   (when (file-exists-p env-file)
 	 (load-file env-file))
 #+END_SRC
+
 * Default Appearance
 ** Inhibit Startup Screen and Message
 
@@ -102,16 +108,16 @@ See [[https://emacsthemes.com/][Emacs Themes]] for a collection of themes.
   ;;   (load-theme 'solarized-dark)
   ;; )
 
-  ;; (use-package dracula-theme
-  ;;   :ensure t
-  ;;   :config
-  ;;   (load-theme 'dracula)
-  ;; )
-
-  (use-package base16-theme
+  (use-package dracula-theme
 	 :ensure t
 	 :config
-	 (load-theme 'base16-railscasts))
+	 (load-theme 'dracula)
+  )
+
+  ;; (use-package base16-theme
+  ;;   :ensure t
+  ;;   :config
+  ;;   (load-theme 'base16-railscasts))
 
 #+END_SRC
 ** Dashboard
@@ -147,6 +153,7 @@ commands.
 	 :config
 	 (which-key-mode))
 #+END_SRC
+
 * Backup Settings
 ** Disable Backups and Auto-Saves
 
@@ -154,6 +161,7 @@ commands.
   (setq make-backup-files nil)
   (setq auto-save-default nil)
 #+END_SRC
+
 * File and Buffer Management
 ** Default Encoding System
 
@@ -320,6 +328,9 @@ files, buffers, and bookmarks.
 #+BEGIN_SRC emacs-lisp
   (use-package helm
 	 :ensure t
+	 :init
+	 (helm-mode 1)
+	 (setq helm-bookmark-show-location t)
 	 :bind
 	 ("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files)
@@ -388,7 +399,11 @@ are being used here:
 	 :bind
 	 ("M-o" . crux-smart-open-line-above)
 	 ("C-<backspace>" . crux-kill-line-backwards)
+	 ("C-c f" . crux-recentf-find-file)
+	 ("C-c r" . crux-rename-file-and-buffer)
+	 ("C-c K" . crux-kill-other-buffers)
 	 ([remap move-beginning-of-line] . crux-move-beginning-of-line))
+
 
 #+END_SRC
 
@@ -425,23 +440,6 @@ Enables visual cues for indentation
   (global-set-key (kbd "C-c w") 'ace-window)
 #+END_SRC
 * Typesetting Systems
-** Document Preparation with LaTex
-
-Using AUCTeX for producing TeX based content, including LaTex,
-requires a TeX system such as TeX Live. To acquire TeX Live for
-Windows, download the installer from [[https://www.tug.org/texlive/acquire-netinstall.html][here]]. On Ubuntu, install
-(texlive-full) from repositories.
-
-Helpful links:
-
-- [[https://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs][A Simpleton Guide to TeX Workflow with Emacs]]
- 
-
-#+BEGIN_SRC emacs-lisp
-  (use-package auctex
-	 :ensure t
-	 :mode ("\\.tex\\'" . TeX-latex-mode))
-#+END_SRC
 ** Org Mode
 
 Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-your-org-agenda/][this]]. For a list of symbols see [[https://www.w3schools.com/charsets/ref_html_entities_4.asp][here]].
@@ -457,14 +455,22 @@ Styling orgmode, inspired by [[https://thraxys.wordpress.com/2016/01/14/pimp-up-
 	  'org-mode-hook
 	  (lambda () (org-bullets-mode 1)))
 	 (setq org-ellipsis " ▾"))
+  (setq org-image-actual-width (list 750))
 #+END_SRC
 
 Insert default header when creating new files
 
 #+BEGIN_SRC emacs-lisp
-  (define-auto-insert "\.org" "default.org")
+;;  (define-auto-insert "\.org" "default.org")
 #+END_SRC
-** COMMENT Markdown Mode
+
+Other org mode defaults
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-folded t)
+#+END_SRC
+
+** Markdown Mode
 
 Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
 
@@ -494,6 +500,153 @@ Setup major mode for [[https://jblevins.org/projects/markdown-mode/][Markdown]].
 						"<script src='"
 						markdown-home
 						"github.js' defer></script>")))
+#+END_SRC
+* Research and Journaling
+** LaTex and Bibtex
+
+Using AUCTeX for producing TeX based content, including LaTex,
+requires a TeX system such as TeX Live. To acquire TeX Live for
+Windows, download the installer from [[https://www.tug.org/texlive/acquire-netinstall.html][here]]. On Ubuntu, install
+(texlive-full) from repositories.
+
+Helpful links:
+
+- [[https://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs][A Simpleton Guide to TeX Workflow with Emacs]]
+ 
+
+#+BEGIN_SRC emacs-lisp
+  (use-package auctex
+	 :ensure t
+	 :mode ("\\.tex\\'" . TeX-latex-mode))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-bibtex
+	 :ensure t
+	 :bind (
+			  :map
+			  bibtex-mode-map
+			  ("M-q" . bibtex-reformat))
+	 :config
+	 (global-set-key (kbd "C-c b") 'helm-bibtex)
+	 (setq bibtex-completion-bibliography
+			 '(concat (getenv "JOURNAL_DIR") "\\bibliography")))
+#+END_SRC
+
+** Org References
+	
+#+BEGIN_SRC emacs-lisp
+  (use-package org-ref
+	 :ensure t
+	 :config
+	 (setq
+	  reftex-default-bibliography
+	  '(concat (getenv "JOURNAL_DIR") "\\bibliography\\default.bib"))
+	 (setq
+	  org-ref-bibliography-notes (concat (getenv "JOURNAL_DIR") "\\bibliography\\notes.org")
+	  org-ref-default-bibliography (list (concat (getenv "JOURNAL_DIR") "\\bibliography\\default.bib"))
+	  org-ref-pdf-directory (concat (getenv "JOURNAL_DIR") "\\bibliography\\pdfs"))
+	 (setq
+	  bibtex-completion-bibliography (concat (getenv "JOURNAL_DIR") "\\bibliography\\default.bib")
+	  bibtex-completion-library-path (concat (getenv "JOURNAL_DIR") "\\bibliography\\pdfs")
+	  bibtex-completion-notes-path (getenv "JOURNAL_DIR")))
+
+  (require 'org-ref-arxiv)
+#+END_SRC
+** Org Roam
+	
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+	 :ensure t
+	 :init
+	 (setq org-roam-v2-ack t)
+	 :custom
+	 (org-roam-directory (concat (getenv "JOURNAL_DIR") "\\roam"))
+	 :bind (("C-c n l" . org-roam-buffer-toggle)
+			  ("C-c n f" . org-roam-node-find)
+			  ("C-c n g" . org-roam-graph)
+			  ("C-c n i" . org-roam-node-insert)
+			  ("C-c n c" . org-roam-capture)
+			  ("C-c n t" . org-roam-tag-add)
+			  ;; Dailies
+			  ("C-c n j" . org-roam-dailies-capture-today))
+	 :config
+	 (org-roam-db-autosync-mode)
+	 (setq org-roam-graph-executable (getenv "GRAPHVIZ"))
+	 ;; If using org-roam-protocol
+	 (require 'org-roam-protocol))
+	 (setq org-roam-capture-templates
+			 '(("l" "Literature" plain "%?"
+				 :target (file+head "${slug}.org"
+										  "#+title: ${title}\n#+author: %(concat user-full-name)\n#+email: %(concat user-mail-address)\n#+created: %(format-time-string \"%Y-%m-%d %H:%M\")\n#+notetype: literature\n#+filetags:\n\n")
+				 :unnarrowed t)
+				("f" "Fleeting" plain "%?"
+				 :target (file+head "${slug}.org"
+										  "#+title: ${title}\n#+author: %(concat user-full-name)\n#+email: %(concat user-mail-address)\n#+created: %(format-time-string \"%Y-%m-%d %H:%M\")\n#+notetype: fleeting\n#+filetags:\n\n")
+				 :unnarrowed t)
+				("p" "Permanent" plain "%?"
+				 :target (file+head "${slug}.org"
+										  "#+title: ${title}\n#+author: %(concat user-full-name)\n#+email: %(concat user-mail-address)\n#+created: %(format-time-string \"%Y-%m-%d %H:%M\")\n#+notetype: permanent\n#+filetags:\n\n")
+				 :unnarrowed t)))
+	
+#+END_SRC
+** Org Roam Bibtex
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam-bibtex
+	 :ensure t)
+  (org-roam-bibtex-mode)
+#+END_SRC
+
+** Org Roam UI
+
+#+BEGIN_SRC emacs-lisp
+	 (use-package websocket
+		:ensure t)
+
+	 (use-package simple-httpd
+		:ensure t)
+
+	 (add-to-list 'load-path "C:\\Users\\Dileban\\.emacs.d\\packages\\org-roam-ui")
+	 (load-library "org-roam-ui")
+	 (setq org-roam-ui-follow nil)
+    (setq org-roam-ui-open-on-start nil)
+#+END_SRC
+
+** Publishing
+#+BEGIN_SRC emacs-lisp
+  (require 'find-lisp)
+  (setq org-export-with-section-numbers nil)
+  (setq org-export-with-drawers t)
+  (setq org-html-postamble-format 
+	 '(("en"
+		 "<span class=\"zettel-postamble\">author:%a;modified:%C</span>")))
+  (setq org-id-extra-files (find-lisp-find-files org-roam-directory "\.org$"))
+  (setq org-publish-project-alist
+	 `(
+		("journal",
+		 :base-directory "C:\\Users\\Dileban\\Projects\\github.com\\dileban\\journal\\roam\\"
+		 :base-extension "org"
+		 :publishing-directory "C:\\Users\\Dileban\\Projects\\github.com\\dileban\\journal\\build\\"
+		 :recursive t
+		 :publishing-function org-html-publish-to-html
+		 :with-properties nil
+		 :with-author t
+		 :with-tags t
+		 :with-date t
+		 :with-email nil
+		 :auto-preamble t
+		 :auto-sitemap t
+		 :sitemap-title "Zettelkasten"
+		 :sitemap-filename "zettelkasten.org"
+		 :html-doctype "html5"
+		 :html-head "<link rel=\"stylesheet\" href=\"../css/style.css\" type=\"text/css\"/>"
+		 :html-preamble t
+		 :html-postamble t
+		 :html-link-up "./zettelkasten.html"
+		 :html-link-home "./zettelkasten.html"
+		 )
+	 ))
 #+END_SRC
 * Programming
 ** General
@@ -545,7 +698,6 @@ Show matching parentheses.
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode 1)
 #+END_SRC
-
 ** Language Server Protocol
 
 #+BEGIN_SRC emacs-lisp
@@ -555,6 +707,10 @@ Show matching parentheses.
 	 :hook
 	 ((rust-mode . lsp)
 	  (lsp-mode . lsp-enable-which-key-integration))
+	 :bind
+	 (:map
+	  lsp-mode-map
+	  ("C-." . lsp-describe-thing-at-point))
 	 :commands lsp)
 #+END_SRC
 
@@ -570,8 +726,6 @@ Show matching parentheses.
 	 :config
 	 (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+END_SRC
-
-
 ** Working with Projects
 
 [[https://github.com/bbatsov/projectile][Projectile]], a useful project interaction extension that makes working
@@ -713,6 +867,9 @@ Setup major mode for programming with Rust
 	 (add-hook 'rust-mode-hook 'cargo-minor-mode))
 #+END_SRC
 ** Yaml
+	:PROPERTIES:
+	:NOTER_DOCUMENT: config.org
+	:END:
 
 Setup [[https://github.com/yoshiki/yaml-mode][major mode]] for editing YAML files.
 
@@ -735,5 +892,3 @@ List of emacs configurations for inspiration
 + [[https://github.com/bbatsov/emacs.d/blob/master/init.el][Bozhidar Batsov]]
 + [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][John Wiegley]]
 + [[https://github.com/abo-abo/oremacs][Oleh Krehel (abo abo)]]
-
-
