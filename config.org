@@ -601,16 +601,16 @@ Helpful links:
 ** Org Roam UI
 
 #+BEGIN_SRC emacs-lisp
-	 (use-package websocket
-		:ensure t)
+  (use-package websocket
+	 :ensure t)
 
-	 (use-package simple-httpd
-		:ensure t)
+  (use-package simple-httpd
+	 :ensure t)
 
-	 (add-to-list 'load-path "C:\\Users\\Dileban\\.emacs.d\\packages\\org-roam-ui")
-	 (load-library "org-roam-ui")
-	 (setq org-roam-ui-follow nil)
-    (setq org-roam-ui-open-on-start nil)
+  (use-package org-roam-ui
+	 :ensure t)
+  (setq org-roam-ui-follow nil)
+  (setq org-roam-ui-open-on-start nil)
 #+END_SRC
 
 ** Publishing
@@ -625,9 +625,9 @@ Helpful links:
   (setq org-publish-project-alist
 	 `(
 		("journal",
-		 :base-directory "C:\\Users\\Dileban\\Projects\\github.com\\dileban\\journal\\roam\\"
+		 :base-directory (concat (getenv "JOURNAL_DIR") "\\roam")
 		 :base-extension "org"
-		 :publishing-directory "C:\\Users\\Dileban\\Projects\\github.com\\dileban\\journal\\build\\"
+		 :publishing-directory (concat (getenv "JOURNAL_DIR") "\\build")
 		 :recursive t
 		 :publishing-function org-html-publish-to-html
 		 :with-properties nil
