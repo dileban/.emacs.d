@@ -529,8 +529,6 @@ Helpful links:
 			  ("M-q" . bibtex-reformat))
 	 :config
 	 (global-set-key (kbd "C-c b") 'helm-bibtex)
-	 (setq bibtex-completion-bibliography
-			 (concat (getenv "JOURNAL_DIR") "\\bibliography\\default.bib")))
 #+END_SRC
 
 ** Org References
