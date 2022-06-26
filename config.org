@@ -588,7 +588,7 @@ Helpful links:
 				 :target (file+head "${slug}.org"
 										  "#+title: ${title}\n#+author: %(concat user-full-name)\n#+email: %(concat user-mail-address)\n#+created: %(format-time-string \"%Y-%m-%d %H:%M\")\n#+notetype: permanent\n#+filetags:\n\n")
 				 :unnarrowed t)))
-	
+
 #+END_SRC
 ** Org Roam Bibtex
 
@@ -625,9 +625,9 @@ Helpful links:
   (setq org-publish-project-alist
 	 `(
 		("journal",
-		 :base-directory (concat (getenv "JOURNAL_DIR") "\\roam")
+		 :base-directory ,org-roam-directory
 		 :base-extension "org"
-		 :publishing-directory (concat (getenv "JOURNAL_DIR") "\\build")
+		 :publishing-directory ,(concat (getenv "JOURNAL_DIR") "\\build")
 		 :recursive t
 		 :publishing-function org-html-publish-to-html
 		 :with-properties nil
@@ -651,6 +651,10 @@ Helpful links:
 * Programming
 ** General
 
+#+BEGIN_SRC emacs-lisp
+;;  (setq warning-minimum-level :error)
+#+END_SRC
+	
 [[https://github.com/flycheck/flycheck][Flycheck]] is a syntax checking extension that supports over 50 
 languages.
 
