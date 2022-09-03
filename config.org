@@ -528,7 +528,7 @@ Helpful links:
 			  bibtex-mode-map
 			  ("M-q" . bibtex-reformat))
 	 :config
-	 (global-set-key (kbd "C-c b") 'helm-bibtex)
+	 (global-set-key (kbd "C-c b") 'helm-bibtex))
 #+END_SRC
 
 ** Org References
@@ -720,6 +720,12 @@ Show matching parentheses.
   (use-package lsp-ui
 	 :config
 	 (setq lsp-ui-doc-delay 1))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-lsp
+	 :commands
+	 helm-lsp-workspace-symbol)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
